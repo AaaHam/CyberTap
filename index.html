@@ -39,6 +39,20 @@
 
         .fw-particle { position: fixed; pointer-events: none; z-index: 2000; animation: firework 2s ease-out forwards; font-family: monospace; font-size: 20px; font-weight: bold; }
         @keyframes firework { from { transform: translate(0, 0); opacity: 1; } to { transform: translate(var(--tx), var(--ty)); opacity: 0; } }
+    #ad-boost-btn { 
+    background: var(--b); 
+    color: #000; 
+    border: none; 
+    padding: 10px; 
+    border-radius: 8px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    margin-bottom: 10px; 
+    font-size: 12px; 
+    transition: 0.3s; 
+    width: 100%;
+}
+#ad-boost-btn:hover { background: white; box-shadow: 0 0 10px var(--b); }
     </style><link rel="icon" type="image/png" href="logo.png">
 <link rel="apple-touch-icon" href="logo.png">
 </head>
@@ -68,6 +82,7 @@
     </div>
 
     <div class="panel" style="order: 1;">
+        <button id="ad-boost-btn" onclick="triggerAdBoost()">⚡ ACTIVER BOOST x2 (Lien Pub)</button>
         <div id="money">0 $</div>
         <div id="p-bar"><div id="p-fill"></div></div>
         <p id="rank" style="text-align: center; color: var(--p); font-size: 14px; margin: 5px 0;">GRADE : NOOB</p>
@@ -196,7 +211,7 @@
 
     const handleTap = (e) => {
         if (e.type === 'touchstart') e.preventDefault();
-        let gain = _c * _boost; _s += gain;
+        let gain = _c * _boost * _adBoost;
         const x = e.clientX || (e.touches ? e.touches[0].pageX : 0);
         const y = e.clientY || (e.touches ? e.touches[0].pageY : 0);
         const t = document.createElement('div');
@@ -255,9 +270,21 @@
         });
     }
     setInterval(drawM, 50);
+    const PUB_URL = "https://data527.click/c9d1981980a5ac85d5d3/b9db05320b/?placementName=default"; 
+let _adBoost = 1;
+    function triggerAdBoost() {
+    window.open(PUB_URL, '_blank'); 
+    _adBoost = 2;
+    updateUI();
+    setTimeout(() => {
+        _adBoost = 1;
+        updateUI();
+    }, 5000);
+}
 </script>
 </body>
 
 </html>
+
 
 
